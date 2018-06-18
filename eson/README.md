@@ -1,16 +1,14 @@
 # ONAP_LAB
-This project provides steps and artifacts for building ONAP and Integration Projects around it.
+
+This project provides steps and artifacts for building ESON with ONAP.
+
+![ESON](https://github.com/moffzilla/CAE/blob/master/media/CAE-Conceptual.png)
  	
 ## Requirements
 
-- Running on Ubuntu Xenial (Cores=2 Mem=8G Root-Disk=30G)
-- This project has tested it in OpenStack RHOSP 10
-- Please note that we mount an extra volume and use as default for Docker storage.
-- Make sure resources as flavor, image, SSH Keys, Security Groups referenced in the artifacts exist in the selected region.
-- You’ll need OpenStack CLI installed.
-- More minimum requirements can be found examining the Playbooys.
+- [ONAP](https://github.com/moffzilla/CAE/blob/master/media/CAE-Conceptual.png) working platform 
 
-## ONAP Base Deployment
+## ESON Base Deployment
 
 Source your authentication credentials:
 

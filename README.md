@@ -49,7 +49,7 @@ The command openstack server show <instance UUID> will provide details about the
 
 You can see the public IP and FQDN
 
-Remove:
+Remove
 
 	openstack stack delete ONAP-stack
 	
@@ -57,6 +57,7 @@ You can also delete the stack at the Horizon Dashboard
 
 ## Sub-Projects
 
-![ESON](https://github.com/moffzilla/CAE/blob/master/media/CAE-Conceptual.png)
+[ ESON ](https://github.com/moffzilla/ONAP_LAB/tree/master/eson)
+MEDIATION
 
 
