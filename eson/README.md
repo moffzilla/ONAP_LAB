@@ -9,7 +9,6 @@ This project provides steps and artifacts for building ONAP and Integration Proj
 - Make sure resources as flavor, image, SSH Keys, Security Groups referenced in the artifacts exist in the selected region.
 - You’ll need OpenStack CLI installed.
 - More minimum requirements can be found examining the Playbooys.
-- All use cases required ONAP Base Deployment ( unless indicated at sub-project section )
 
 ## ONAP Base Deployment
 
@@ -54,9 +53,3 @@ Remove:
 	openstack stack delete ONAP-stack
 	
 You can also delete the stack at the Horizon Dashboard
-
-## Sub-Projects
-
-![ESON](https://github.com/moffzilla/CAE/blob/master/media/CAE-Conceptual.png)
-
-
