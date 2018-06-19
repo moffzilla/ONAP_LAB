@@ -1,6 +1,6 @@
 heat_template_version: 2013-05-23
 
-description: > OOM Template 
+description:  OOM Template 
 
 parameters:
   key_name:
@@ -69,11 +69,10 @@ resources:
             sudo apt-get update -y
             sudo apt-get install -y ansible git
             # Configure Ansible
-            echo \"localhost ansible_connection=local\" > /etc/ansible/hosts
-	          echo \"log_path = /var/log/ansible.log\" >> /etc/ansible/ansible.cfg
-
+            echo "localhost ansible_connection=local" > /etc/ansible/hosts
+            echo "log_path = /var/log/ansible.log" >> /etc/ansible/ansible.cfg
             # Launch Installer
-      	    #sudo ansible-pull -U ", __AnsibleRepository__," ","-e"," ","config=",__OOMTemplate__," ",__AnsiblePlaybook__," ","-vvvv"," 
+            #sudo ansible-pull -U ", __AnsibleRepository__," ","-e"," ","config=",__OOMTemplate__," ",__AnsiblePlaybook__," ","-vvvv"," 
               
 
 output:
