@@ -1,7 +1,12 @@
 # ONAP_LAB
 This project provides steps and artifacts for building ONAP and Integration Projects around it.
+
 It is based on [ OOM User Guide ](http://onap.readthedocs.io/en/latest/submodules/oom.git/docs/oom_user_guide.html)
- 	
+ 
+ 
+![ESON](https://github.com/moffzilla/ONAP_LAB/blob/master/media/OOM_ONAP_Single.png)
+
+ 
 ## Requirements
 
 - Running on Ubuntu Xenial (Cores=2 Mem=8G Root-Disk=30G)
