@@ -1,5 +1,6 @@
 # ONAP_LAB
 This project provides steps and artifacts for building ONAP and Integration Projects around it.
+It is based on [ OOM User Guide ](http://onap.readthedocs.io/en/latest/submodules/oom.git/docs/oom_user_guide.html)
  	
 ## Requirements
 
