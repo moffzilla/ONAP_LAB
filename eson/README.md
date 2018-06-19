@@ -6,7 +6,7 @@ This project provides steps and artifacts for building ESON with ONAP.
  	
 ## Requirements
 
-- [ONAP](https://github.com/moffzilla/CAE/blob/master/media/CAE-Conceptual.png) working platform 
+- [ONAP](https://github.com/moffzilla/ONAP_LAB) working platform 
 
 ## ESON Base Deployment
 
