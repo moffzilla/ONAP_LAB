@@ -66,4 +66,11 @@ You can also delete the stack at the Horizon Dashboard
 [ ESON ](https://github.com/moffzilla/ONAP_LAB/tree/master/eson)
 MEDIATION
 
+## OpenStack Appendix
+
+You can upload the base Ubuntu 16.04 image as follows:
+
+	openstack image create --private --disk-format qcow2 --container-format bare --file xenial-server-cloudimg-amd64-disk1.img ubuntu1604
+	
+Image: [ xenial-server-cloudimg-amd64-disk1.img ](http://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img) 
 
