@@ -29,7 +29,7 @@ Source your authentication credentials:
 
 Execute:
 
-	$ openstack stack create -t deploy/oom_onap.yaml --parameters "AnsibleRepository=https://github.com/moffzilla/ONAP_LAB.git;	AnsiblePlaybook=deploy/site.yaml;OOMTemplate=minimal.cfg.j2" OOM
+	$ openstack stack create -t deploy/oom_onap.yaml --parameters "AnsibleRepository=https://github.com/moffzilla/ONAP_LAB.git; AnsiblePlaybook=deploy/site.yaml;OOMTemplate=minimal.cfg.j2" ONAP-stack
 
 You can replace the following default settings:
 
@@ -43,7 +43,11 @@ You can replace the following default settings:
   
 You can also create the stack at the Horizon Dashboard
 
-Use the command _openstack stack list to view stack that was created for the instance.
+Use the command 
+
+	openstack stack list 
+
+to verify that the stack was created for the instance.
 
 Display:
 
