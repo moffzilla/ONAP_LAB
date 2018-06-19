@@ -2,7 +2,7 @@
 
 This project provides steps and artifacts for building ESON with ONAP.
 
-![ESON](https://github.com/moffzilla/CAE/blob/master/media/CAE-Conceptual.png)
+![ESON](https://github.com/moffzilla/ONAP_LAB/blob/master/media/OOM_ONAP_ESON_Single.png)
  	
 ## Requirements
 
