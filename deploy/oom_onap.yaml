@@ -25,6 +25,18 @@ parameters:
     default: ONAP_ProvNet_1
     constraints:
       - custom_constraint: neutron.network
+  AnsibleRepository:
+    type: string
+    label: Ansible Repository
+    description: Ansible Repository for playbooks and roles.
+  AnsiblePlaybook:
+    type: string
+    label: Ansible Playbook
+    description: Ansible Playbook Startup.
+  OOMTemplate:
+    type: string
+    label: OOM Template to deploy
+    description: OOM Size to deploy.  
   
 resources:
   my_instance:
@@ -40,21 +52,34 @@ resources:
         - network: {get_param: net1}
       user_data:
         str_replace:
-          template: |
-            #cloud-config
-            bootcmd:
-             - "ifdir='/etc/network/interfaces.d'; for iface in $(ip -o link | cut -d: -f2 | tr -d ' ' | grep ^eth); do if [ ! -e ${ifdir}'/'${iface}'.cfg' ]; then echo 'Creating iface file for '${iface}; echo 'auto '${iface}'\niface '${iface}' inet dhcp\n' > $ifdir'/'$iface'.cfg'; ifup ${iface}; fi; done"
-            runcmd:
-             - "echo 'Complete' > /var/log/cloud-init-complete.txt"
-            system_info:
-              default_user:
-                name: $USER
-                shell: /bin/bash
           params:
-           $USER: {get_param: user}
-      user_data_format: RAW_3
+            __AnsibleRepository__: { get_param: AnsibleRepository }
+            __AnsiblePlaybook__: { get_param: AnsiblePlaybook }
+            __OOMTemplate__: { get_param: OOMTemplate }
+          template: |
+            #!/bin/bash -ex
+               http_proxy=http://10.7.0.140:8080/
+               https_proxy=http://10.7.0.140:8080/
+              #no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+              HTTP_PROXY=http://10.7.0.140:8080/
+              HTTPS_PROXY=http://10.7.0.140:8080/
+              #NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
+            # install dependencies
+            sudo apt-add-repository ppa:ansible/ansible -y 
+            sudo apt-get update -y
+            sudo apt-get install -y ansible git
+            # Configure Ansible
+            echo \"localhost ansible_connection=local\" > /etc/ansible/hosts
+	          echo \"log_path = /var/log/ansible.log\" >> /etc/ansible/ansible.cfg
+
+            # Launch Installer
+      	    #sudo ansible-pull -U ", __AnsibleRepository__," ","-e"," ","config=",__OOMTemplate__," ",__AnsiblePlaybook__," ","-vvvv"," 
+              
 
 output:
   instance_name:
     description: Get the instance's name
     value: { get_attr: [ my_instance, name ] }
+  instance_ip:
+    description: IP address of the instance
+    value: { get_attr: [my_instance, first_address] }
