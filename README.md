@@ -29,15 +29,15 @@ Source your authentication credentials:
 
 Execute:
 
-	$ openstack stack create -t deploy/oom_onap.yaml --parameters "AnsibleRepository=https://github.com/moffzilla/ONAP.git;	AnsiblePlaybook=deploy/ap_onap.yml;OOMTemplate=minimal.cfg.j2" OOM
+	$ openstack stack create -t deploy/oom_onap.yaml --parameters "AnsibleRepository=https://github.com/moffzilla/ONAP_LAB.git;	AnsiblePlaybook=deploy/site.yaml;OOMTemplate=minimal.cfg.j2" OOM
 
 You can replace the following default settings:
 
-	KeyName": "generic-cloud-wk"
+	KeyName": "ONAP"
 	
-	AnsibleRepository": https://github.com/moffzilla/ONAP.git"
+	AnsibleRepository": https://github.com/moffzilla/ONAP_LAB.git"
 	
-	AnsiblePlaybook: "deploy/ap_onap.yml" 
+	AnsiblePlaybook: "deploy/site.yaml" 
   
     OOMTemplate: "minimal.cfg.j2"
   
