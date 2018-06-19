@@ -1,0 +1,60 @@
+heat_template_version: 2013-05-23
+
+description: > OOM Template 
+
+parameters:
+  key_name:
+    type: string
+    default: ONAP
+    description: You own existing key pair to use for the instance
+  flavor:
+    type: string
+    description: Instance type for OOM
+    default: ONAP_FSB
+  image:
+    type: string
+    default: ubuntu_xenial
+    description: ID or name of the image to use for the instance
+  user:
+    type: string
+    description: Default user
+    default: ubuntu1604
+  net1:
+    type: string
+    description: (existing) network for the server to be created
+    default: ONAP_ProvNet_1
+    constraints:
+      - custom_constraint: neutron.network
+  
+resources:
+  my_instance:
+    type: OS::Nova::Server
+    properties:
+      name: OOM
+      image: { get_param: image }
+      flavor: { get_param: flavor }
+      key_name: { get_param: key_name }
+      config_drive: 'True'
+#      block_device_mapping: [{volume_id: { get_param: fsb2_cinder_vol }, device_name: vda}]
+      networks:
+        - network: {get_param: net1}
+      user_data:
+        str_replace:
+          template: |
+            #cloud-config
+            bootcmd:
+             - "ifdir='/etc/network/interfaces.d'; for iface in $(ip -o link | cut -d: -f2 | tr -d ' ' | grep ^eth); do if [ ! -e ${ifdir}'/'${iface}'.cfg' ]; then echo 'Creating iface file for '${iface}; echo 'auto '${iface}'\niface '${iface}' inet dhcp\n' > $ifdir'/'$iface'.cfg'; ifup ${iface}; fi; done"
+            runcmd:
+             - "echo 'Complete' > /var/log/cloud-init-complete.txt"
+            system_info:
+              default_user:
+                name: $USER
+                shell: /bin/bash
+          params:
+           $USER: {get_param: user}
+      user_data_format: RAW_3
+
+output:
+  instance_name:
+    description: Get the instance's name
+    value: { get_attr: [ my_instance, name ] }
