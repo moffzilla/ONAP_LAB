@@ -27,16 +27,24 @@ parameters:
       - custom_constraint: neutron.network
   AnsibleRepository:
     type: string
-    label: Ansible Repository
+    label: Ansible_Repository
     description: Ansible Repository for playbooks and roles.
+    default: https://github.com/moffzilla/ONAP_LAB.git
   AnsiblePlaybook:
     type: string
-    label: Ansible Playbook
+    label: Ansible_Playbook
     description: Ansible Playbook Startup.
+    default: deploy/site.yaml
   OOMTemplate:
     type: string
-    label: OOM Template to deploy
-    description: OOM Size to deploy.  
+    label: OOM_Template
+    description: OOM Size to deploy.
+    default: minimal.cfg.j2
+  PROXY_LAB:
+    type: string
+    label: HTTP_PROXY
+    description: HTTP and HTTPS Proxy.
+    default: http://10.7.0.140:8080/       
   
 resources:
   my_instance:
@@ -56,13 +64,14 @@ resources:
             __AnsibleRepository__: { get_param: AnsibleRepository }
             __AnsiblePlaybook__: { get_param: AnsiblePlaybook }
             __OOMTemplate__: { get_param: OOMTemplate }
+            __PROXY_LAB__: { get_param: PROXY_LAB }
           template: |
             #!/bin/bash -ex
-               http_proxy=http://10.7.0.140:8080/
-               https_proxy=http://10.7.0.140:8080/
+               http_proxy=__PROXY_LAB__
+               https_proxy=__PROXY_LAB__
               #no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
-              HTTP_PROXY=http://10.7.0.140:8080/
-              HTTPS_PROXY=http://10.7.0.140:8080/
+              HTTP_PROXY=__PROXY_LAB__
+              HTTPS_PROXY=__PROXY_LAB__
               #NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
             # install dependencies
             sudo apt-add-repository ppa:ansible/ansible -y 
