@@ -44,7 +44,7 @@ parameters:
     type: string
     label: HTTP_PROXY
     description: HTTP and HTTPS Proxy.
-    default: http://10.7.0.140:8080/
+    default: http://10.7.0.140:8081/
   DNS_LAB:
     type: string
     label: DNS_LAB
@@ -91,8 +91,6 @@ resources:
             __DNS_SEARCH__: { get_param: DNS_SEARCH }            
           template: |
             #!/bin/bash -ex
-            #sudo sh -c 'echo search __DNS_LAB__ >> /etc/resolv.conf'
-            #sudo sh -c 'echo nameserver 10.7.0.140 >> /etc/resolv.conf'
             sudo sh -c 'echo search __DNS_SEARCH__ >> /etc/resolv.conf'
             sudo sh -c 'echo nameserver __DNS_LAB__ >> /etc/resolv.conf'            
             http_proxy=__PROXY_LAB__
