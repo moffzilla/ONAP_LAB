@@ -13,18 +13,18 @@ parameters:
     default: ONAP_FSB
   image:
     type: string
-    default: ubuntu_xenial
+    default: ubuntu1604
     description: ID or name of the image to use for the instance
   user:
     type: string
     description: Default user
-    default: ubuntu1604
+    default: ubuntu
   net1:
     type: string
     description: (existing) network for the server to be created
     default: ONAP_ProvNet_1
     constraints:
-      - custom_constraint: neutron.network
+#      - custom_constraint: neutron.network
   AnsibleRepository:
     type: string
     label: Ansible_Repository
@@ -44,10 +44,30 @@ parameters:
     type: string
     label: HTTP_PROXY
     description: HTTP and HTTPS Proxy.
-    default: http://10.7.0.140:8080/       
-  
+    default: http://10.7.0.140:8080/
+  DNS_LAB:
+    type: string
+    label: DNS_LAB
+    description: Provide your primary DNS.
+    default: 10.7.0.140      
+  DNS_SEARCH:
+    type: string
+    label: DNS_SEARCH
+    description: Provide your default DNS Search Domain.
+    default: bete.ericy.com 
+
+
 resources:
-  my_instance:
+
+  onap_security_group:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: onap_security_group
+      rules:
+        - protocol: tcp
+        - protocol: icmp
+
+  my_onap:
     type: OS::Nova::Server
     properties:
       name: OOM
@@ -56,6 +76,8 @@ resources:
       key_name: { get_param: key_name }
       config_drive: 'True'
 #      block_device_mapping: [{volume_id: { get_param: fsb2_cinder_vol }, device_name: vda}]
+      security_groups:
+        - { get_resource: onap_security_group }
       networks:
         - network: {get_param: net1}
       user_data:
@@ -65,14 +87,20 @@ resources:
             __AnsiblePlaybook__: { get_param: AnsiblePlaybook }
             __OOMTemplate__: { get_param: OOMTemplate }
             __PROXY_LAB__: { get_param: PROXY_LAB }
+            __DNS_LAB__: { get_param: DNS_LAB }
+            __DNS_SEARCH__: { get_param: DNS_SEARCH }            
           template: |
             #!/bin/bash -ex
-               http_proxy=__PROXY_LAB__
-               https_proxy=__PROXY_LAB__
-              #no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
-              HTTP_PROXY=__PROXY_LAB__
-              HTTPS_PROXY=__PROXY_LAB__
-              #NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
+            #sudo sh -c 'echo search __DNS_LAB__ >> /etc/resolv.conf'
+            #sudo sh -c 'echo nameserver 10.7.0.140 >> /etc/resolv.conf'
+            sudo sh -c 'echo search __DNS_SEARCH__ >> /etc/resolv.conf'
+            sudo sh -c 'echo nameserver __DNS_LAB__ >> /etc/resolv.conf'            
+            http_proxy=__PROXY_LAB__
+            https_proxy=__PROXY_LAB__
+            #no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+            HTTP_PROXY=__PROXY_LAB__
+            HTTPS_PROXY=__PROXY_LAB__
+            #NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
             # install dependencies
             sudo apt-add-repository ppa:ansible/ansible -y 
             sudo apt-get update -y
@@ -84,10 +112,10 @@ resources:
             #sudo ansible-pull -U ", __AnsibleRepository__," ","-e"," ","config=",__OOMTemplate__," ",__AnsiblePlaybook__," ","-vvvv"," 
               
 
-output:
+outputs:
   instance_name:
     description: Get the instance's name
-    value: { get_attr: [ my_instance, name ] }
+    value: { get_attr: [ my_onap, name ] }
   instance_ip:
     description: IP address of the instance
-    value: { get_attr: [my_instance, first_address] }
+    value: { get_attr: [my_onap, first_address] }
