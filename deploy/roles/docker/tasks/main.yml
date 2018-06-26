@@ -33,7 +33,7 @@
 - name: Configure HTTP Proxy for Docker
   become: true  
   copy:
-    src: .ansible/pull/oom/deploy/roles/docker/http-proxy.conf
+    src: http-proxy.conf
     dest: /etc/systemd/system/docker.service.d/http-proxy.conf
     owner: root
     group: root
@@ -42,7 +42,7 @@
 - name: Configure HTTPS Proxy for Docker
   become: true  
   copy:
-    src: .ansible/pull/oom/deploy/roles/docker/https-proxy.conf
+    src: https-proxy.conf
     dest: /etc/systemd/system/docker.service.d/https-proxy.conf
     owner: root
     group: root
