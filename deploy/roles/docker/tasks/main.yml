@@ -47,7 +47,13 @@
     owner: root
     group: root
     mode: 0777
-  notify: 'docker-restart-service'
+
+- name: Docker-restart-service
+  become: true
+  service:
+    name: 'docker'
+    state: 'restarted'
+    enabled: 'yes'
 
 
 

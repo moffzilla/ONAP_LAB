@@ -1,7 +1,0 @@
----
-- name: 'docker-restart-service'
-  become: true
-  service:
-    name: 'docker'
-    state: 'restarted'
-    enabled: 'yes'
