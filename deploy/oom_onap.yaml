@@ -98,11 +98,15 @@ resources:
             export HTTP_PROXY=__PROXY_LAB__
             export HTTPS_PROXY=__PROXY_LAB__
             #NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
+            sudo sh -c 'echo http_proxy=__PROXY_LAB__ >> /etc/environment'
+            sudo sh -c 'echo https_proxy=__PROXY_LAB__ >> /etc/environment'
+            sudo sh -c 'echo HTTP_PROXY=__PROXY_LAB__ >> /etc/environment'
+            sudo sh -c 'echo HTTPS_PROXY=__PROXY_LAB__ >> /etc/environment'           
             # Clone Main Repository
             git clone __AnsibleRepository__
             # Set up proxies for APT            
             sudo cp ONAP_LAB/deploy/95proxies /etc/apt/apt.conf.d/95proxies
-            sudo chmod 766 /etc/apt/apt.conf.d/95proxies
+            sudo chmod 644 /etc/apt/apt.conf.d/95proxies
             # install dependencies
             sudo apt-add-repository ppa:ansible/ansible -y 
             sudo apt-get update -y
