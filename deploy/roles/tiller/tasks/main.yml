@@ -1,4 +1,10 @@
 ---
+- name: Creates /mnt only required in one large volume
+  file: 
+    path: /mnt 
+    state: directory
+    mode: "u=rwx,g=wx,o=rwx"
+
 - name: Collect Tiller Service Account Deployment Artifacts
   become: yes
   git:

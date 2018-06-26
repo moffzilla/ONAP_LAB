@@ -7,7 +7,7 @@
   roles:
       - common 
       - docker
-      - volumes
+#      - volumes
       - k8s
       - helm
       - tiller

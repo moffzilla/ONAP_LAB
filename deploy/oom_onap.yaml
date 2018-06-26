@@ -119,8 +119,8 @@ resources:
             echo "localhost ansible_connection=local" > /etc/ansible/hosts
             echo "log_path = /var/log/ansible.log" >> /etc/ansible/ansible.cfg
             # Launch Installer
-            sudo ansible-pull -U ", __AnsibleRepository__," ","-e"," ","config=",__OOMTemplate__," ",__AnsiblePlaybook__," ","-vvvv"," 
-              
+            #sudo ansible-pull -U ", __AnsibleRepository__," ","-e"," ","config=",__OOMTemplate__," ",__AnsiblePlaybook__," ","-vvvv"," 
+            #sudo ansible-pull -U https://github.com/moffzilla/ONAP_LAB.git -e config=minimal.cfg.j2 deploy/site.yaml -vvvv
 
 outputs:
   instance_name:
