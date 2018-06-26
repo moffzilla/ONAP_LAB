@@ -101,7 +101,8 @@ resources:
             # Clone Main Repository
             git clone __AnsibleRepository__
             # Set up proxies for APT            
-            sudo cp deploy/95proxies /etc/apt/apt.conf.d/95proxies
+            sudo cp ONAP_LAB/deploy/95proxies /etc/apt/apt.conf.d/95proxies
+            sudo chmod 766 /etc/apt/apt.conf.d/95proxies
             # install dependencies
             sudo apt-add-repository ppa:ansible/ansible -y 
             sudo apt-get update -y
