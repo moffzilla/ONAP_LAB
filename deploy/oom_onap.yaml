@@ -106,11 +106,11 @@ resources:
             #sudo myIP=$(ifconfig -a ens3 | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -n 1 )
             #sudo myhostname=oom
             #sudo sh -c 'echo $myIP $myhostname >> /etc/hosts'
-            # Clone Main Repository
-            git clone __AnsibleRepository__
             # Set up proxies for APT            
             sudo cp ONAP_LAB/deploy/95proxies /etc/apt/apt.conf.d/95proxies
             sudo chmod 644 /etc/apt/apt.conf.d/95proxies
+            # Clone Main Repository
+            git clone __AnsibleRepository__            
             # install dependencies
             sudo apt-add-repository ppa:ansible/ansible -y 
             sudo apt-get update -y

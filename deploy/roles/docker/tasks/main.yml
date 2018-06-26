@@ -22,3 +22,38 @@
 - name: Add ubuntu user to docker group
   become: true
   user: name=ubuntu groups=docker append=yes
+
+- name: Creates New Docker ONAP Mount directory
+  become: true
+  file: 
+    path: /etc/systemd/system/docker.service.d
+    state: directory
+    mode: "u=rwx,g=wx,o=rwx"
+
+- name: Configure HTTP Proxy for Docker
+  become: true  
+  copy:
+    src: .ansible/pull/oom/deploy/roles/docker/http-proxy.conf
+    dest: /etc/systemd/system/docker.service.d/http-proxy.conf
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Configure HTTPS Proxy for Docker
+  become: true  
+  copy:
+    src: .ansible/pull/oom/deploy/roles/docker/https-proxy.conf
+    dest: /etc/systemd/system/docker.service.d/https-proxy.conf
+    owner: root
+    group: root
+    mode: 0777
+  notify: 'docker-restart-service'
+
+- name: 'docker-restart-service'
+  become: true
+  service:
+    name: 'docker'
+    state: 'restarted'
+    enabled: 'yes'
+
+
