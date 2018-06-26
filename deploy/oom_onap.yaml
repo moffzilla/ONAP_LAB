@@ -101,7 +101,11 @@ resources:
             sudo sh -c 'echo http_proxy=__PROXY_LAB__ >> /etc/environment'
             sudo sh -c 'echo https_proxy=__PROXY_LAB__ >> /etc/environment'
             sudo sh -c 'echo HTTP_PROXY=__PROXY_LAB__ >> /etc/environment'
-            sudo sh -c 'echo HTTPS_PROXY=__PROXY_LAB__ >> /etc/environment'           
+            sudo sh -c 'echo HTTPS_PROXY=__PROXY_LAB__ >> /etc/environment'
+            # Add OOM Resolution
+            #sudo myIP=$(ifconfig -a ens3 | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -n 1 )
+            #sudo myhostname=oom
+            #sudo sh -c 'echo $myIP $myhostname >> /etc/hosts'
             # Clone Main Repository
             git clone __AnsibleRepository__
             # Set up proxies for APT            
@@ -115,7 +119,7 @@ resources:
             echo "localhost ansible_connection=local" > /etc/ansible/hosts
             echo "log_path = /var/log/ansible.log" >> /etc/ansible/ansible.cfg
             # Launch Installer
-            #sudo ansible-pull -U ", __AnsibleRepository__," ","-e"," ","config=",__OOMTemplate__," ",__AnsiblePlaybook__," ","-vvvv"," 
+            sudo ansible-pull -U ", __AnsibleRepository__," ","-e"," ","config=",__OOMTemplate__," ",__AnsiblePlaybook__," ","-vvvv"," 
               
 
 outputs:
