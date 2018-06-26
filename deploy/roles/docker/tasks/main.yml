@@ -49,11 +49,5 @@
     mode: 0777
   notify: 'docker-restart-service'
 
-- name: 'docker-restart-service'
-  become: true
-  service:
-    name: 'docker'
-    state: 'restarted'
-    enabled: 'yes'
 
 
