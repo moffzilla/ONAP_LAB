@@ -121,7 +121,7 @@ resources:
             sudo sh -c 'echo "log_path = /var/log/ansible.log" >> /etc/ansible/ansible.cfg'
 
             # Launch Installer
-            sudo ansible-pull -U ", __AnsibleRepository__," ","-e"," ","config=",__OOMTemplate__," ",__AnsiblePlaybook__," ","-vvvv"," 
+            sudo ansible-pull -U __AnsibleRepository__ -e config=__OOMTemplate__ AnsiblePlaybook__ -vvvv 
             #sudo ansible-pull -U https://github.com/moffzilla/ONAP_LAB.git -e config=minimal.cfg.j2 deploy/site.yaml -vvvv
             # /var/log/cloud-init-output.log
             # docker pull moffzilla/cvaas-gui:dev350
