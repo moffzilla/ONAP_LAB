@@ -53,11 +53,12 @@ Display:
 
 Execute nova list to view list virtual machine instances and obtain the virtual machine instance UUID for the virtul machine created by the heat stack template.
 
-The command openstack stack show <instance UUID> will provide details about the newly deployed instance, e.g. You can see the public IP and FQDN 
         
-    openstack stack show 96f0e4cc-9958-498f-80c1-fd60017d2898 | grep output_value:
+    openstack stack show ONAP-stack | grep output_value:
 
 	  output_value: OOM                                                                      output_value: <instance IP> 
+
+The command openstack stack show <instance UUID> can be also used
 
 You can access by 
 
@@ -65,7 +66,7 @@ You can access by
 
 Full details:
 
-	openstack stack show 96f0e4cc-9958-498f-80c1-fd60017d2898
+	openstack stack show ONAP-stack
 
 Remove
 
