@@ -110,7 +110,7 @@ resources:
             git clone __AnsibleRepository__ /home/ubuntu/ONAP_LAB
             sudo chown ubuntu:ubuntu /home/ubuntu/ONAP_LAB
             # Set up proxies for APT            
-            sudo cp ONAP_LAB/deploy/95proxies /etc/apt/apt.conf.d/95proxies
+            sudo cp /home/ubuntu/ONAP_LAB/deploy/95proxies /etc/apt/apt.conf.d/95proxies
             sudo chmod 644 /etc/apt/apt.conf.d/95proxies           
             # install dependencies
             sudo apt-add-repository ppa:ansible/ansible -y 
