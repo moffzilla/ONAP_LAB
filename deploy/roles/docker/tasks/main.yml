@@ -55,7 +55,11 @@
 - name: Docker-restart-service
   become: true
   command: sudo systemctl daemon-reload
-  
+
+- name: sleep for 180 seconds before continue
+  wait_for: timeout=180
+  delegate_to: localhost
+
 #- name: Docker-restart-service
 #  become: true
 #  service:
