@@ -9,11 +9,10 @@ It is based on [ OOM User Guide ](http://onap.readthedocs.io/en/latest/submodule
  
 ## Requirements
 
-- Running on Ubuntu Xenial (Cores=2 Mem=8G Root-Disk=30G)
-- This project has tested it in OpenStack RHOSP 10 and openstack CLI version "openstack 3.11.0"
-- Please note that we mount an extra volume and use as default for Docker storage.
+- Running on Ubuntu Xenial (Cores=8 Mem=16G Root-Disk=160G - minimal)
+- This project has tested it in OpenStack RHOSP 10 
 - Make sure resources as flavor, image, SSH Keys, Security Groups referenced in the artifacts exist in the selected region.
-- You’ll need OpenStack CLI installed.
+- You’ll need OpenStack CLI installed ( tested with CLI version "openstack 3.11.0")
 - More minimum requirements can be found examining the Playbooys.
 - All use cases required ONAP Base Deployment ( unless indicated at sub-project section )
 
@@ -60,13 +59,23 @@ Execute nova list to view list virtual machine instances and obtain the virtual 
 
 The command openstack stack show <instance UUID> can be also used
 
+Full details:
+
+	openstack stack show ONAP-stack
+
 You can access by 
 
 	ssh ubuntu@<instance IP>
 
-Full details:
+You could verify your deployment by (Please note it may take from 15 ~ 30 mins with minimal deployment depending on your compute resources ) :
 
-	openstack stack show ONAP-stack
+	helm status dev
+
+It shows the status of the charts and associated Pods and Containers
+
+	kubectl get pods --all-namespaces -o=wide
+
+It shows the status of Pods and Containers at Kubernetes level.
 
 Remove
 
