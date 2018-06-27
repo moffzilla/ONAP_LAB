@@ -118,12 +118,14 @@ resources:
             sudo apt-get install -y ansible git
             # Configure Ansible
             sudo sh -c 'echo "localhost ansible_connection=local" >> /etc/ansible/hosts'
-            sudo sh -c 'echo "log_path = /var/log/ansible.log" >> /etc/ansible/ansible.cfg'
+            sudo sh -c 'sed -i -e 's/#log_path/log_path/g' /etc/ansible/ansible.cfg'
+            #sudo sh -c 'echo "log_path = /var/log/ansible.log" >> /etc/ansible/ansible.cfg'
 
             # Launch Installer
             sudo ansible-pull -U __AnsibleRepository__ -e config=__OOMTemplate__ __AnsiblePlaybook__ -vvvv 
             #sudo ansible-pull -U https://github.com/moffzilla/ONAP_LAB.git -e config=minimal.cfg.j2 deploy/site.yaml -vvvv
             # /var/log/cloud-init-output.log
+            # /var/lib/heat-cfntools/cfn-userdata
             # docker pull moffzilla/cvaas-gui:dev350
 outputs:
   instance_name:
