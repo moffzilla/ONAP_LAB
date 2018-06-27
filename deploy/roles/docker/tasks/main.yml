@@ -23,7 +23,7 @@
   become: true
   user: name=ubuntu groups=docker append=yes
 
-- name: Creates New Docker ONAP Mount directory
+- name: Creates New Docker HTTP Proxy folder
   become: true
   file: 
     path: /etc/systemd/system/docker.service.d
@@ -50,10 +50,14 @@
 
 - name: Docker-restart-service
   become: true
-  service:
-    name: 'docker'
-    state: 'restarted'
-    enabled: 'yes'
+  command: systemctl restart docker
 
+#- name: Docker-restart-service
+#  become: true
+#  service:
+#    name: 'docker'
+#    state: 'restarted'
+#    enabled: 'yes'
 
+ 
 

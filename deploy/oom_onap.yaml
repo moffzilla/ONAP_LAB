@@ -107,7 +107,7 @@ resources:
             #sudo myhostname=oom
             #sudo sh -c 'echo $myIP $myhostname >> /etc/hosts'
             # Clone Main Repository
-            git clone __AnsibleRepository_
+            git clone __AnsibleRepository__
             # Set up proxies for APT            
             sudo cp ONAP_LAB/deploy/95proxies /etc/apt/apt.conf.d/95proxies
             sudo chmod 644 /etc/apt/apt.conf.d/95proxies           
@@ -116,12 +116,14 @@ resources:
             sudo apt-get update -y
             sudo apt-get install -y ansible git
             # Configure Ansible
-            echo "localhost ansible_connection=local" > /etc/ansible/hosts
-            echo "log_path = /var/log/ansible.log" >> /etc/ansible/ansible.cfg
+            sudo sh -c 'echo "localhost ansible_connection=local" >> /etc/ansible/hosts'
+            sudo sh -c 'echo "log_path = /var/log/ansible.log" >> /etc/ansible/ansible.cfg'
+            #echo "localhost ansible_connection=local" > /etc/ansible/hosts
+            #echo "log_path = /var/log/ansible.log" >> /etc/ansible/ansible.cfg
             # Launch Installer
             #sudo ansible-pull -U ", __AnsibleRepository__," ","-e"," ","config=",__OOMTemplate__," ",__AnsiblePlaybook__," ","-vvvv"," 
             #sudo ansible-pull -U https://github.com/moffzilla/ONAP_LAB.git -e config=minimal.cfg.j2 deploy/site.yaml -vvvv
-
+            # /var/log/cloud-init-output.log
 outputs:
   instance_name:
     description: Get the instance's name
