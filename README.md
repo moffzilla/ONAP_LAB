@@ -70,7 +70,7 @@ Full details:
 
 Remove
 
-	openstack stack delete ONAP-stack
+	openstack stack delete ONAP-stack -y
 	
 You can also delete the stack at the Horizon Dashboard
 
