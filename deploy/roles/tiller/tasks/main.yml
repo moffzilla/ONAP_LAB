@@ -6,7 +6,7 @@
     mode: "u=rwx,g=wx,o=rwx"
 
 - name: Configuring RBACK for Tiller Deployment
-  shell: kubectl create -f ONAP_LAB/deploy/roles/k8s/tiller-serviceaccount.yaml
+  shell: kubectl create -f /home/ubuntu/ONAP_LAB/deploy/roles/k8s/tiller-serviceaccount.yaml
 
 - name: Initialize Tiller
   shell: helm init --service-account tiller --upgrade

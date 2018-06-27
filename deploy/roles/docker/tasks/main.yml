@@ -50,8 +50,12 @@
 
 - name: Docker-restart-service
   become: true
-  command: systemctl restart docker
+  command: sudo systemctl restart docker
 
+- name: Docker-restart-service
+  become: true
+  command: sudo systemctl daemon-reload
+  
 #- name: Docker-restart-service
 #  become: true
 #  service:
