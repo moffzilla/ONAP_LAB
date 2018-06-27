@@ -107,7 +107,8 @@ resources:
             #sudo myhostname=oom
             #sudo sh -c 'echo $myIP $myhostname >> /etc/hosts'
             # Clone Main Repository
-            git clone __AnsibleRepository__
+            git clone __AnsibleRepository__ /home/ubuntu/ONAP_LAB
+            sudo chown ubuntu:ubuntu /home/ubuntu/ONAP_LAB
             # Set up proxies for APT            
             sudo cp ONAP_LAB/deploy/95proxies /etc/apt/apt.conf.d/95proxies
             sudo chmod 644 /etc/apt/apt.conf.d/95proxies           
