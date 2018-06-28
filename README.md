@@ -58,7 +58,7 @@ Display:
 Execute nova list to view list virtual machine instances and obtain the virtual machine instance UUID for the virtul machine created by the heat stack template.
 
         
-    openstack stack show ONAP-stack | grep output_value:
+    openstack stack show ONAP-stack | grep output_value
 
 	  output_value: OOM                                                                      output_value: <instance IP> 
 
@@ -72,8 +72,16 @@ You can access by
 
 	ssh ubuntu@<instance IP>
 
+Execute Script:
+
+	./runme.sh
+
+Wait for the script to complete.
+
 You could verify your deployment by (Please note it may take from 15 ~ 30 mins with minimal deployment depending on your compute resources ) :
 
+	helm list
+	                                                                            
 	helm status dev
 
 It shows the status of the charts and associated Pods and Containers
