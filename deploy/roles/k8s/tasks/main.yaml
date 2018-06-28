@@ -27,7 +27,7 @@
 
 - name: Reset kubernetes cluster
   become: true
-  shell: kubeadm reset
+  shell: sudo kubeadm reset
 
 - name: Create k8s master node
   become: true
