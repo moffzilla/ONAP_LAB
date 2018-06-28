@@ -60,7 +60,8 @@ Execute nova list to view list virtual machine instances and obtain the virtual 
         
     openstack stack show ONAP-stack | grep output_value
 
-	  output_value: OOM                                                                      output_value: <instance IP> 
+	  output_value: OOM
+	  output_value: <instance IP> 
 
 The command openstack stack show <instance UUID> can be also used
 
@@ -90,11 +91,11 @@ It shows the status of the charts and associated Pods and Containers
 
 It shows the status of Pods and Containers at Kubernetes level.
 
-Remove
+## To Remove
 
 	openstack stack delete ONAP-stack -y
 	
-You can also delete the stack at the Horizon Dashboard
+You can also delete the stack at the Horizon Dashboard.
 
 ## Sub-Projects
 
@@ -102,7 +103,6 @@ You can also delete the stack at the Horizon Dashboard
 MEDIATION
 
 ## OpenStack Appendix
-
 
 
 You can upload the base Ubuntu 16.04 image as follows:
