@@ -26,9 +26,14 @@ Execute:
   
 Source your authentication credentials:
 
-Execute:
+Deploy:
+1) Minimal OOM overriding default templates such as OOMTemplate
 
 	$ openstack stack create -t deploy/oom_onap.yaml --parameter "AnsibleRepository=https://github.com/moffzilla/ONAP_LAB.git" --parameter "AnsiblePlaybook=deploy/site.yaml" --parameter "OOMTemplate=minimal.cfg.j2" ONAP-stack
+
+2) Production OOM overriding default templates, lsuch as VM Flavor
+
+	$ openstack stack create -t deploy/oom_onap.yaml --parameter "AnsibleRepository=https://github.com/moffzilla/ONAP_LAB.git" --parameter "AnsiblePlaybook=deploy/site.yaml" --parameter "OOMTemplate=prod.cfg.j2" --parameter "flavor=ONAP_eSON" ONAP-stack
 
 You can replace the following default settings:
 
