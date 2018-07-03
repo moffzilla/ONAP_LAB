@@ -116,8 +116,10 @@ resources:
             #sudo cp /home/ubuntu/ONAP_LAB/deploy/95proxies /etc/apt/apt.conf.d/95proxies
             sudo chmod 644 /etc/apt/apt.conf.d/95proxies
             # Set up proxies for Docker
-            sudo sh -c 'sed -i -e 's/"http://10.7.0.140:8081/"/__PROXY_LAB__/g' /home/ubuntu/ONAP_LAB/deploy/roles/docker/http-proxy.conf'
-            sudo sh -c 'sed -i -e 's/"http://10.7.0.140:8081/"/__PROXY_LAB__/g' /home/ubuntu/ONAP_LAB/deploy/roles/docker/https-proxy.conf'
+            sudo sh -c 'proxyIP=$(echo __PROXY_LAB__ | awk -F/ '{print $3}')'
+            sudo sh -c 'sed -i -e s/10.7.0.140:8081/$proxyIP/g /home/ubuntu/ONAP_LAB/deploy/roles/docker/http-proxy.conf'
+            sudo sh -c 'proxyIP=$(echo __PROXY_LAB__ | awk -F/ '{print $3}')'
+            sudo sh -c 'sed -i -e s/10.7.0.140:8081/$proxyIP/g /home/ubuntu/ONAP_LAB/deploy/roles/docker/https-proxy.conf'           
             # install dependencies
             sudo apt-add-repository ppa:ansible/ansible -y 
             sudo apt-get update -y
