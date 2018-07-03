@@ -109,16 +109,9 @@ resources:
             # Clone Main Repository
             git clone __AnsibleRepository__ /home/ubuntu/ONAP_LAB
             sudo chown ubuntu:ubuntu /home/ubuntu/ONAP_LAB
-            # Set up proxies for APT
-            sudo sh -c 'echo Acquire::http::proxy "__PROXY_LAB__"; >> /etc/apt/apt.conf.d/95proxies'
-            sudo sh -c 'echo Acquire::ftp::proxy "__PROXY_LAB__"; >> /etc/apt/apt.conf.d/95proxies'
-            sudo sh -c 'echo Acquire::https::proxy "__PROXY_LAB__"; >> /etc/apt/apt.conf.d/95proxies'                       
-            #sudo cp /home/ubuntu/ONAP_LAB/deploy/95proxies /etc/apt/apt.conf.d/95proxies
-            sudo chmod 644 /etc/apt/apt.conf.d/95proxies
-            # Set up proxies for Docker
-            export proxyIP=$(echo __PROXY_LAB__ | awk -F/ '{print $3}')
-            sudo sh -c 'sed -i -e s/10.7.0.140:8081/$proxyIP/g /home/ubuntu/ONAP_LAB/deploy/roles/docker/http-proxy.conf'
-            sudo sh -c 'sed -i -e s/10.7.0.140:8081/$proxyIP/g /home/ubuntu/ONAP_LAB/deploy/roles/docker/https-proxy.conf'           
+            # Set up proxies for APT            
+            sudo cp /home/ubuntu/ONAP_LAB/deploy/95proxies /etc/apt/apt.conf.d/95proxies
+            sudo chmod 644 /etc/apt/apt.conf.d/95proxies           
             # install dependencies
             sudo apt-add-repository ppa:ansible/ansible -y 
             sudo apt-get update -y
@@ -137,6 +130,9 @@ resources:
             #sudo ansible-pull -U https://github.com/moffzilla/ONAP_LAB.git -e config=minimal.cfg.j2 deploy/site.yaml -vvvv
             # /var/log/cloud-init-output.log
             # /var/lib/heat-cfntools/cfn-userdata
+            #kubectl get services --namespace=onap | grep portal
+            #kubectl describe service portal-app --namespace onap
+            # demo123456!
             # docker pull moffzilla/cvaas-gui:dev350
 outputs:
   instance_name:

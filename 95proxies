@@ -1,0 +1,4 @@
+Acquire::http::proxy "http://10.7.0.140:8081";    
+Acquire::ftp::proxy "ftp://10.7.0.140:8081";   
+Acquire::https::proxy "https://10.7.0.140:8081";
+
